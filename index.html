@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>Расчеты по книге К. Бакшта "Вкус жизни"</title>
+
+    <script src="./vue.js"></script>
+
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .container {
+            margin: 40px auto;
+            width: 75%;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+
+        .calculated,
+        .calculated td {
+            background-color: orange;
+            color: white;
+        }
+
+        .calculated-important,
+        .calculated-important td {
+            background-color: orangered;
+            color: white;
+        }
+
+        .entered,
+        .entered td {
+            background-color: skyblue;
+            color: white;
+        }
+
+        td:nth-child(3) {
+            font-weight: bold;
+        }
+
+        td:nth-child(4) {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div>
+            <div>
+                <h1 style="text-align: center;">Константин Бакшт. <br /> "Вкус жизни. Как достигать успеха, финансовой свободы и управлять своей судьбой"</h1>
+            </div>
+
+            <calculations></calculations>
+        </div>
+    </div>
+
+    <script type="text/x-template" id="calculations">
+        <div>
+            <h2>Расчет "Капитал моего времени" (Глава 2. Управление временем стр.60-61)</h2>
+            <h3>I. Капитал моего времени</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="entered">
+                        <td>Полных лет</td>
+                        <td><input type="number" v-model="currentAge" required /> лет</td>
+                        <td>[В]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Я предполагаю, что буду жить до</td>
+                        <td><input type="number" v-model="maxAge" required /> лет</td>
+                        <td>[ВП]</td>
+                        <td>Значение средней продолжительности жизни в России на 2016 г. Мужчины = 66 лет, Женщины = 77 лет</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Среднее кол-во часов сна</td>
+                        <td><input type="number" v-model="sleepHours" required /> часов в день</td>
+                        <td>[Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Часов бодрствования в день</td>
+                        <td>{{awakeHours}} часов</td>
+                        <td>[Бодр = 24 - Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Предположительно осталось лет жизни</td>
+                        <td>{{restYears}} лет</td>
+                        <td>[Л = ВП - В]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Предположительно осталось дней жизни</td>
+                        <td>{{restDays}} дней</td>
+                        <td>[Д = Л * 365]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Общий капитал моего времени в часах</td>
+                        <td>{{restHours}} часов</td>
+                        <td>[Кап<sub>общ</sub> = Д * 24]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated-important">
+                        <td>Капитал моего времени в часах за вычетом времени на сон составляет</td>
+                        <td>{{restHoursExceptSleepHours}} часов</td>
+                        <td>[Кап = Д * Бодр]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>II. Капитал моего активного (рабочего) времени</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="entered">
+                        <td>Полных лет</td>
+                        <td><input type="number" v-model="currentAge" required /> лет</td>
+                        <td>[В]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Я предполагаю, что буду работать и зарабатывать деньги до</td>
+                        <td><input type="number" v-model="maxActiveAge" required /> лет</td>
+                        <td>[ВА]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Среднее кол-во часов сна</td>
+                        <td><input type="number" v-model="sleepHours" required /> часов в день</td>
+                        <td>[Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Часов бодрствования в день</td>
+                        <td>{{awakeHours}} часов</td>
+                        <td>[Бодр = 24 - Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Предположительно осталось лет активной жизни</td>
+                        <td>{{restActiveYears}} лет</td>
+                        <td>[ЛА = ВА - В]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Предположительно осталось дней активной жизни</td>
+                        <td>{{restActiveDays}} дней</td>
+                        <td>[ДА = ЛА * 365]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Общий капитал моего активного времени в часах</td>
+                        <td>{{restActiveHours}} часов</td>
+                        <td>[КапА<sub>общ</sub> = ДА * 24]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated-important">
+                        <td>Капитал моего активного времени в часах за вычетом времени на сон составляет</td>
+                        <td>{{restActiveHoursExceptSleepHours}} часов</td>
+                        <td>[КапА = ДА * Бодр]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Расчет "Стоимость моего времени" (Глава 2. Управление временем стр.72-73)</h2>
+            <h3>III. Средняя стоимость моего времени</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="entered">
+                        <td>Среднее кол-во часов сна</td>
+                        <td><input type="number" v-model="sleepHours" required /> часов в день</td>
+                        <td>[Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Часов бодрствования в день</td>
+                        <td>{{awakeHours}} часов</td>
+                        <td>[Бодр = 24 - Сон]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Среднемесячный доход</td>
+                        <td><input type="number" v-model="incomePerMonth" required /> рублей</td>
+                        <td>[$месяц]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 дня</td>
+                        <td>{{incomePerDay}} рублей</td>
+                        <td>[$день = $месяц / 30]</td>
+                        <td>при расчете 30 дней в месяце</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 часа</td>
+                        <td>{{incomePerHour}} рублей</td>
+                        <td>[$час = $день / Бодр]</td>
+                        <td>за вычетом времени на сон</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 минуты</td>
+                        <td>{{incomePerMinute}} рублей</td>
+                        <td>[$минута = $час / 60]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 5 минут</td>
+                        <td>{{incomePer5Minutes}} рублей</td>
+                        <td>[$минута * 5]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 10 минут</td>
+                        <td>{{incomePer10Minutes}} рублей</td>
+                        <td>[$минута * 10]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>IV. Средняя стоимость моего рабочего времени</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="entered">
+                        <td>Среднее кол-во рабочих дней в месяц</td>
+                        <td><input type="number" v-model="workingDaysPerMonth" required /> дней</td>
+                        <td>[РД]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Среднее кол-во рабочих часов в день</td>
+                        <td><input type="number" v-model="workingHoursPerMonth" required /> часов</td>
+                        <td>[РЧ]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 дня рабочего времени</td>
+                        <td>{{incomePerWorkingDay}} рублей</td>
+                        <td>[$деньР = $месяц / РД]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 часа рабочего времени</td>
+                        <td>{{incomePerWorkingHour}} рублей</td>
+                        <td>[$часР = $деньР / РЧ]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 1 минуты рабочего времени</td>
+                        <td>{{incomePerWorkingMinute}} рублей</td>
+                        <td>[$минутаР = $часР / 60]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 5 минут рабочего времени</td>
+                        <td>{{incomePer5WorkingMinutes}} рублей</td>
+                        <td>[$минутаР * 5]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Средняя стоимость 10 минут рабочего времен</td>
+                        <td>{{incomePer10WorkingMinutes}} рублей</td>
+                        <td>[$минутаР * 10]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Определение финансовых целей (Глава 3. Азбука денег: управление личным кошельком стр.141-142)</h2>
+            <p><i>В данных расчетах не учитывается инфляция! Около 10%-12% в год</i></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="entered">
+                        <td>Ежемесячные расходы-минимум</td>
+                        <td><input type="number" v-model="expensesMin" required /> рублей</td>
+                        <td>[Бюджет-MIN]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Ежемесячные расходы-норма</td>
+                        <td><input type="number" v-model="expensesNorm" required /> рублей</td>
+                        <td>[Бюджет-НОРМА]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Ежемесячные расходы-максимум</td>
+                        <td><input type="number" v-model="expensesMax" required /> рублей</td>
+                        <td>[Бюджет-MAX]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Капитал финансовой защиты-MIN</td>
+                        <td>{{financeProtectionMin}} рублей</td>
+                        <td>[Бюджет-MIN * 6]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Капитал финансовой защиты-НОРМА</td>
+                        <td>{{financeProtectionNorm}} рублей</td>
+                        <td>[Бюджет-MIN * 12]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Планируемая доходность пассивных инвестиций минимум</td>
+                        <td><input type="number" v-model="passiveIncomePercentage" required /> % годовых</td>
+                        <td>[%Пасс - ориентировочно 20%]</td>
+                        <td>20% по Бакшту это процент от инвестирования. К примеру % по вкладам в банках равняется примерно 7%.</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Коэффициент, на который необходимо умножить сумму требуемого ежемесячного дохода, что бы получить размер инвестициооного капитала дающего этот доход</td>
+                        <td>{{passiveIncomeCoefficient}}</td>
+                        <td>[КоэффПасс = 1200 / %Пасс]</td>
+                        <td>1200 - это 12 месяцев, умноженные на 100%</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Капитал финансовой безопасности-MIN</td>
+                        <td>{{financeSafetyMin}} рублей</td>
+                        <td>[Бюджет-MIN * КоэфПасс]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Капитал финансовой безопасности-НОРМА</td>
+                        <td>{{financeSafetyNorm}} рублей</td>
+                        <td>[Бюджет-Норма * КоэфПасс]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Капитал финансовой свободы</td>
+                        <td>{{financeFreedom}} рублей</td>
+                        <td>[Бюджет-MAX * КоэфПасс]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Прогноз доходов на оставшуюся жизнь (Глава 4. Инвестиции и финансовая свобода стр.219)</h2>
+            <p><i>В данных расчетах не учитывается инфляция! Около 10%-12% в год</i></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Вопрос или описание значения</th>
+                        <th>Вводимое/рассчитанное значение</th>
+                        <th>Формула/Название переменной</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="calculated">
+                        <td>Среднегодовой доход</td>
+                        <td>{{incomePerYear}} рублей</td>
+                        <td>[$год = $месяц * 12]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>За всю оставшуюся жизнь я заработаю</td>
+                        <td>{{incomePerLife}} рублей</td>
+                        <td>[$жизнь = $год * ЛА]</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('calculations', {
+            template: '#calculations',
+            data() {
+                return {
+                    //В
+                    currentAge: 30,
+                    //ВП
+                    maxAge: 70,
+                    //Сон
+                    sleepHours: 8,
+                    //ВА
+                    maxActiveAge: 60,
+                    //$месяц
+                    incomePerMonth: 0,
+                    //РД
+                    workingDaysPerMonth: 22,
+                    //РЧ
+                    workingHoursPerMonth: 8,
+                    //Бюджет-MIN
+                    expensesMin: 0,
+                    //Бюджет-НОРМА
+                    expensesNorm: 0,
+                    //Бюджет-MAX
+                    expensesMax: 0,
+                    //%Пасс
+                    passiveIncomePercentage: 20,
+                }
+            },
+            computed: {
+                //Л
+                restYears: function () {
+                    return this.maxAge - this.currentAge;
+                },
+                //Бодр
+                awakeHours: function () {
+                    return 24 - this.sleepHours;
+                },
+
+                //Д
+                restDays: function () {
+                    return this.restYears * 365;
+                },
+                //Кап<sub>общ</sub>
+                restHours: function () {
+                    return this.restDays * 24;
+                },
+                //Кап
+                restHoursExceptSleepHours: function () {
+                    return this.restDays * this.awakeHours;
+                },
+                //ЛА
+                restActiveYears: function () {
+                    return this.maxActiveAge - this.currentAge;
+                },
+                //ДА
+                restActiveDays: function () {
+                    return this.restActiveYears * 365;
+                },
+                //КапА<sub>общ</sub>
+                restActiveHours: function () {
+                    return this.restActiveDays * 24;
+                },
+                //КапА
+                restActiveHoursExceptSleepHours: function () {
+                    return this.restActiveDays * this.awakeHours;
+                },
+                //$день
+                incomePerDay: function () {
+                    return this.incomePerMonth / 30;
+                },
+                //$час
+                incomePerHour: function () {
+                    return this.incomePerDay / this.awakeHours;
+                },
+                //$минута
+                incomePerMinute: function () {
+                    return this.incomePerHour / 60;
+                },
+                incomePer5Minutes: function () {
+                    return this.incomePerMinute * 5;
+                },
+                incomePer10Minutes: function () {
+                    return this.incomePerMinute * 10;
+                },
+                //$деньР
+                incomePerWorkingDay: function () {
+                    return this.incomePerMonth / this.workingDaysPerMonth;
+                },
+                //$часР
+                incomePerWorkingHour: function () {
+                    return this.incomePerWorkingDay / this.workingHoursPerMonth;
+                },
+                //$минутаР
+                incomePerWorkingMinute: function () {
+                    return this.incomePerWorkingHour / 60;
+                },
+                incomePer5WorkingMinutes: function () {
+                    return this.incomePerWorkingMinute * 5;
+                },
+                incomePer10WorkingMinutes: function () {
+                    return this.incomePerWorkingMinute * 10;
+                },
+                financeProtectionMin: function () {
+                    return this.expensesMin * 6;
+                },
+                financeProtectionNorm: function () {
+                    return this.expensesMin * 12;
+                },
+                //КоэфПасс
+                passiveIncomeCoefficient: function () {
+                    return 1200 / this.passiveIncomePercentage;
+                },
+                financeSafetyMin: function () {
+                    return this.expensesMin * this.passiveIncomeCoefficient;
+                },
+                financeSafetyNorm: function () {
+                    return this.expensesNorm * this.passiveIncomeCoefficient;
+                },
+                financeFreedom: function () {
+                    return this.expensesMax * this.passiveIncomeCoefficient;
+                },
+                //$год
+                incomePerYear: function () {
+                    return this.incomePerMonth * 12;
+                },
+                //$жизнь
+                incomePerLife: function () {
+                    return this.incomePerYear * this.restActiveYears;
+                },
+            }
+        });
+
+        var app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
