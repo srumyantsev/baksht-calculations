@@ -8,6 +8,7 @@
     <title>Расчеты по книге К. Бакшта "Вкус жизни"</title>
 
     <script src="./vue.js"></script>
+    <script src="./accounting.min.js"></script>
 
     <style>
         table {
@@ -481,67 +482,95 @@
                 },
                 //$день
                 incomePerDay: function () {
-                    return this.incomePerMonth / 30;
+                    var value = this.incomePerMonth / 30;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$час
                 incomePerHour: function () {
-                    return this.incomePerDay / this.awakeHours;
+                    var value = this.incomePerDay / this.awakeHours;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$минута
                 incomePerMinute: function () {
-                    return this.incomePerHour / 60;
+                    var value = this.incomePerHour / 60;
+                    return this.roundToPrecision(value, 2);
                 },
                 incomePer5Minutes: function () {
-                    return this.incomePerMinute * 5;
+                    var value = this.incomePerMinute * 5;
+                    return this.roundToPrecision(value, 2);
                 },
                 incomePer10Minutes: function () {
-                    return this.incomePerMinute * 10;
+                    var value = this.incomePerMinute * 10;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$деньР
                 incomePerWorkingDay: function () {
-                    return this.incomePerMonth / this.workingDaysPerMonth;
+                    var value = this.incomePerMonth / this.workingDaysPerMonth;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$часР
                 incomePerWorkingHour: function () {
-                    return this.incomePerWorkingDay / this.workingHoursPerMonth;
+                    var value = this.incomePerWorkingDay / this.workingHoursPerMonth;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$минутаР
                 incomePerWorkingMinute: function () {
-                    return this.incomePerWorkingHour / 60;
+                    var value = this.incomePerWorkingHour / 60;
+                    return this.roundToPrecision(value, 2);
                 },
                 incomePer5WorkingMinutes: function () {
-                    return this.incomePerWorkingMinute * 5;
+                    var value = this.incomePerWorkingMinute * 5;
+                    return this.roundToPrecision(value, 2);
                 },
                 incomePer10WorkingMinutes: function () {
-                    return this.incomePerWorkingMinute * 10;
+                    var value = this.incomePerWorkingMinute * 10;
+                    return this.roundToPrecision(value, 2);
                 },
                 financeProtectionMin: function () {
-                    return this.expensesMin * 6;
+                    var value = this.expensesMin * 6;
+                    return this.roundToPrecision(value, 2);
                 },
                 financeProtectionNorm: function () {
-                    return this.expensesMin * 12;
+                    var value = this.expensesMin * 12;
+                    return this.roundToPrecision(value, 2);
                 },
                 //КоэфПасс
                 passiveIncomeCoefficient: function () {
-                    return 1200 / this.passiveIncomePercentage;
+                    var value = 1200 / this.passiveIncomePercentage;
+                    return this.roundToPrecision(value, 2);
                 },
                 financeSafetyMin: function () {
-                    return this.expensesMin * this.passiveIncomeCoefficient;
+                    var value = this.expensesMin * this.passiveIncomeCoefficient;
+                    return this.roundToPrecision(value, 2);
                 },
                 financeSafetyNorm: function () {
-                    return this.expensesNorm * this.passiveIncomeCoefficient;
+                    var value = this.expensesNorm * this.passiveIncomeCoefficient;
+                    return this.roundToPrecision(value, 2);
                 },
                 financeFreedom: function () {
-                    return this.expensesMax * this.passiveIncomeCoefficient;
+                    var value = this.expensesMax * this.passiveIncomeCoefficient;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$год
                 incomePerYear: function () {
-                    return this.incomePerMonth * 12;
+                    var value = this.incomePerMonth * 12;
+                    return this.roundToPrecision(value, 2);
                 },
                 //$жизнь
                 incomePerLife: function () {
-                    return this.incomePerYear * this.restActiveYears;
+                    var value = this.incomePerYear * this.restActiveYears;
+                    return this.roundToPrecision(value, 2);
                 },
+            },
+            methods: {
+                roundToPrecision(number, precision) {
+                    return Number.parseFloat(number.toFixed(precision));
+                }
+            },
+            filters: {
+                formatNumber(number, precision) {
+                    return accounting.formatNumber(number, precision, " ", ",");
+                }
             }
         });
 
