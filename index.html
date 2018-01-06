@@ -31,12 +31,6 @@
             color: white;
         }
 
-        .calculated-important,
-        .calculated-important td {
-            background-color: orangered;
-            color: white;
-        }
-
         .entered,
         .entered td {
             background-color: skyblue;
@@ -57,6 +51,11 @@
         <div>
             <div>
                 <h1 style="text-align: center;">Константин Бакшт. <br /> "Вкус жизни. Как достигать успеха, финансовой свободы и управлять своей судьбой"</h1>
+            </div>
+
+            <div>
+                <h1>Инструкция</h1>
+                <p>Для произведения расчетов - введите ваши значения в ячейки таблицы с цветом <span class="entered">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>. Результаты расчетов будут отображены в ячейках с цветом <span class="calculated">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>. Некоторые ячейки содержат значения "по умолчанию". Некоторые ячейки дублируются, значения вводимые в одну из таких ячеек продублируется в остальные ячейки.</p>
             </div>
 
             <calculations></calculations>
@@ -119,7 +118,7 @@
                         <td>[Кап<sub>общ</sub> = Д * 24]</td>
                         <td>-</td>
                     </tr>
-                    <tr class="calculated-important">
+                    <tr class="calculated">
                         <td>Капитал моего времени в часах за вычетом времени на сон составляет</td>
                         <td>{{restHoursExceptSleepHours | formatNumber(0)}} часов</td>
                         <td>[Кап = Д * Бодр]</td>
@@ -181,7 +180,7 @@
                         <td>[КапА<sub>общ</sub> = ДА * 24]</td>
                         <td>-</td>
                     </tr>
-                    <tr class="calculated-important">
+                    <tr class="calculated">
                         <td>Капитал моего активного времени в часах за вычетом времени на сон составляет</td>
                         <td>{{restActiveHoursExceptSleepHours | formatNumber(0)}} часов</td>
                         <td>[КапА = ДА * Бодр]</td>
@@ -310,7 +309,7 @@
             </table>
 
             <h2>Определение финансовых целей (Глава 3. Азбука денег: управление личным кошельком стр.141-142)</h2>
-            <p><i>В данных расчетах не учитывается инфляция! Около 10%-12% в год</i></p>
+            <p><i>В данных расчетах не учитывается инфляция</i></p>
             <table>
                 <thead>
                     <tr>
@@ -385,7 +384,7 @@
             </table>
 
             <h2>Прогноз доходов на оставшуюся жизнь (Глава 4. Инвестиции и финансовая свобода стр.219)</h2>
-            <p><i>В данных расчетах не учитывается инфляция! Около 10%-12% в год</i></p>
+            <p><i>В данных расчетах не учитывается инфляция</i></p>
             <table>
                 <thead>
                     <tr>
@@ -396,6 +395,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="entered">
+                        <td>Полных лет</td>
+                        <td><input type="number" v-model="currentAge" required /> лет</td>
+                        <td>[В]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Я предполагаю, что буду работать и зарабатывать деньги до</td>
+                        <td><input type="number" v-model="maxActiveAge" required /> лет</td>
+                        <td>[ВА]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="entered">
+                        <td>Среднемесячный доход</td>
+                        <td><input type="number" v-model="incomePerMonth" required /> рублей</td>
+                        <td>[$месяц]</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="calculated">
+                        <td>Предположительно осталось лет активной жизни</td>
+                        <td>{{restActiveYears}} лет</td>
+                        <td>[ЛА = ВА - В]</td>
+                        <td>-</td>
+                    </tr>
                     <tr class="calculated">
                         <td>Среднегодовой доход</td>
                         <td>{{incomePerYear | formatNumber(2)}} рублей</td>
