@@ -1,4 +1,4 @@
 ﻿# Константин Бакшт. "Вкус жизни. Как достигать успеха, финансовой свободы и управлять своей судьбой"
 
 
-Страница с расчетами из книги: [https://srumyantsev.github.io/baksht-calculations/]
+Страница с расчетами из книги: https://srumyantsev.github.io/baksht-calculations/
