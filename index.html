@@ -109,19 +109,19 @@
                     </tr>
                     <tr class="calculated">
                         <td>Предположительно осталось дней жизни</td>
-                        <td>{{restDays}} дней</td>
+                        <td>{{restDays | formatNumber(0)}} дней</td>
                         <td>[Д = Л * 365]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Общий капитал моего времени в часах</td>
-                        <td>{{restHours}} часов</td>
+                        <td>{{restHours | formatNumber(0)}} часов</td>
                         <td>[Кап<sub>общ</sub> = Д * 24]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated-important">
                         <td>Капитал моего времени в часах за вычетом времени на сон составляет</td>
-                        <td>{{restHoursExceptSleepHours}} часов</td>
+                        <td>{{restHoursExceptSleepHours | formatNumber(0)}} часов</td>
                         <td>[Кап = Д * Бодр]</td>
                         <td>-</td>
                     </tr>
@@ -171,19 +171,19 @@
                     </tr>
                     <tr class="calculated">
                         <td>Предположительно осталось дней активной жизни</td>
-                        <td>{{restActiveDays}} дней</td>
+                        <td>{{restActiveDays | formatNumber(0)}} дней</td>
                         <td>[ДА = ЛА * 365]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Общий капитал моего активного времени в часах</td>
-                        <td>{{restActiveHours}} часов</td>
+                        <td>{{restActiveHours | formatNumber(0)}} часов</td>
                         <td>[КапА<sub>общ</sub> = ДА * 24]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated-important">
                         <td>Капитал моего активного времени в часах за вычетом времени на сон составляет</td>
-                        <td>{{restActiveHoursExceptSleepHours}} часов</td>
+                        <td>{{restActiveHoursExceptSleepHours | formatNumber(0)}} часов</td>
                         <td>[КапА = ДА * Бодр]</td>
                         <td>-</td>
                     </tr>
@@ -222,31 +222,31 @@
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 дня</td>
-                        <td>{{incomePerDay}} рублей</td>
+                        <td>{{incomePerDay | formatNumber(2)}} рублей</td>
                         <td>[$день = $месяц / 30]</td>
                         <td>при расчете 30 дней в месяце</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 часа</td>
-                        <td>{{incomePerHour}} рублей</td>
+                        <td>{{incomePerHour | formatNumber(2)}} рублей</td>
                         <td>[$час = $день / Бодр]</td>
                         <td>за вычетом времени на сон</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 минуты</td>
-                        <td>{{incomePerMinute}} рублей</td>
+                        <td>{{incomePerMinute | formatNumber(2)}} рублей</td>
                         <td>[$минута = $час / 60]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 5 минут</td>
-                        <td>{{incomePer5Minutes}} рублей</td>
+                        <td>{{incomePer5Minutes | formatNumber(2)}} рублей</td>
                         <td>[$минута * 5]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 10 минут</td>
-                        <td>{{incomePer10Minutes}} рублей</td>
+                        <td>{{incomePer10Minutes | formatNumber(2)}} рублей</td>
                         <td>[$минута * 10]</td>
                         <td>-</td>
                     </tr>
@@ -278,31 +278,31 @@
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 дня рабочего времени</td>
-                        <td>{{incomePerWorkingDay}} рублей</td>
+                        <td>{{incomePerWorkingDay | formatNumber(2)}} рублей</td>
                         <td>[$деньР = $месяц / РД]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 часа рабочего времени</td>
-                        <td>{{incomePerWorkingHour}} рублей</td>
+                        <td>{{incomePerWorkingHour | formatNumber(2)}} рублей</td>
                         <td>[$часР = $деньР / РЧ]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 1 минуты рабочего времени</td>
-                        <td>{{incomePerWorkingMinute}} рублей</td>
+                        <td>{{incomePerWorkingMinute | formatNumber(2)}} рублей</td>
                         <td>[$минутаР = $часР / 60]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 5 минут рабочего времени</td>
-                        <td>{{incomePer5WorkingMinutes}} рублей</td>
+                        <td>{{incomePer5WorkingMinutes | formatNumber(2)}} рублей</td>
                         <td>[$минутаР * 5]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Средняя стоимость 10 минут рабочего времен</td>
-                        <td>{{incomePer10WorkingMinutes}} рублей</td>
+                        <td>{{incomePer10WorkingMinutes | formatNumber(2)}} рублей</td>
                         <td>[$минутаР * 10]</td>
                         <td>-</td>
                     </tr>
@@ -341,13 +341,13 @@
                     </tr>
                     <tr class="calculated">
                         <td>Капитал финансовой защиты-MIN</td>
-                        <td>{{financeProtectionMin}} рублей</td>
+                        <td>{{financeProtectionMin | formatNumber(2)}} рублей</td>
                         <td>[Бюджет-MIN * 6]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Капитал финансовой защиты-НОРМА</td>
-                        <td>{{financeProtectionNorm}} рублей</td>
+                        <td>{{financeProtectionNorm | formatNumber(2)}} рублей</td>
                         <td>[Бюджет-MIN * 12]</td>
                         <td>-</td>
                     </tr>
@@ -365,19 +365,19 @@
                     </tr>
                     <tr class="calculated">
                         <td>Капитал финансовой безопасности-MIN</td>
-                        <td>{{financeSafetyMin}} рублей</td>
+                        <td>{{financeSafetyMin | formatNumber(2)}} рублей</td>
                         <td>[Бюджет-MIN * КоэфПасс]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Капитал финансовой безопасности-НОРМА</td>
-                        <td>{{financeSafetyNorm}} рублей</td>
+                        <td>{{financeSafetyNorm | formatNumber(2)}} рублей</td>
                         <td>[Бюджет-Норма * КоэфПасс]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>Капитал финансовой свободы</td>
-                        <td>{{financeFreedom}} рублей</td>
+                        <td>{{financeFreedom | formatNumber(2)}} рублей</td>
                         <td>[Бюджет-MAX * КоэфПасс]</td>
                         <td>-</td>
                     </tr>
@@ -398,13 +398,13 @@
                 <tbody>
                     <tr class="calculated">
                         <td>Среднегодовой доход</td>
-                        <td>{{incomePerYear}} рублей</td>
+                        <td>{{incomePerYear | formatNumber(2)}} рублей</td>
                         <td>[$год = $месяц * 12]</td>
                         <td>-</td>
                     </tr>
                     <tr class="calculated">
                         <td>За всю оставшуюся жизнь я заработаю</td>
-                        <td>{{incomePerLife}} рублей</td>
+                        <td>{{incomePerLife | formatNumber(2)}} рублей</td>
                         <td>[$жизнь = $год * ЛА]</td>
                         <td>-</td>
                     </tr>
